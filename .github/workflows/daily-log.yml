@@ -28,19 +28,19 @@ jobs:
             exit 0
           fi
 
-          cat > "$FILE" << EOF
-# Dev Log — ${DATE}
-
-## What I learned today
-
-
-## What I built / practiced
-
-
-## Notes
-
-
-EOF
+          printf '%s\n' \
+            "# Dev Log — ${DATE}" \
+            "" \
+            "## What I learned today" \
+            "" \
+            "" \
+            "## What I built / practiced" \
+            "" \
+            "" \
+            "## Notes" \
+            "" \
+            "" \
+            > "$FILE"
 
       - name: Commit and push
         run: |
