@@ -1,45 +1,53 @@
 # Dev Log
 
-Daily learning and coding notes — one commit per day to keep the streak alive.
+Automated daily GitHub activity — one commit every morning, no manual work required.
 
 ## How it works
 
-- Every day, a GitHub Action creates a new log file under `logs/`.
-- Open that day's file and fill in what you learned, built, or practiced.
-- Commit your edits anytime — extra commits are welcome.
+- Every day at **6:00 AM IST**, GitHub Actions creates a log file and commits it **as you**.
+- Commits use your verified email so they count on your **green contribution graph**.
+- You can still edit logs manually anytime for extra commits.
 
-## Log format
+## One-time setup (required for automation)
 
-Each file lives at `logs/YYYY-MM-DD.md` and uses this structure:
+### 1. Create a GitHub token
 
-```markdown
-# Dev Log — YYYY-MM-DD
+1. Open [github.com/settings/tokens](https://github.com/settings/tokens)
+2. Click **Generate new token (classic)**
+3. Name it `dev-log-automation`
+4. Check **`repo`** (full control of private repositories)
+5. Generate and **copy the token**
 
-## What I learned today
+### 2. Add the token as a repo secret
 
-## What I built / practiced
+1. Open [github.com/mgneropj/dev-log/settings/secrets/actions](https://github.com/mgneropj/dev-log/settings/secrets/actions)
+2. Click **New repository secret**
+3. Name: `GH_PAT`
+4. Value: paste your token
+5. Click **Add secret**
 
-## Notes
+### 3. Verify your email
+
+Make sure `kolherushikesh04@gmail.com` is verified in [GitHub email settings](https://github.com/settings/emails).
+
+### 4. Test the workflow
+
+1. Open [Actions](https://github.com/mgneropj/dev-log/actions)
+2. Click **Daily Dev Log** → **Run workflow** → **Run workflow**
+3. Check that a new commit appears under your name
+
+After this, automation runs every day with no commands needed.
+
+## Manual log (optional)
+
+```powershell
+notepad C:\Users\kolhe\Projects\dev-log\logs\2026-07-26.md
+git add .
+git commit -m "log: 2026-07-26"
+git push
 ```
 
-## Setup (one time)
-
-1. Create a new **public** repo on GitHub named `dev-log` (or any name you like).
-2. Push this project:
-
-   ```powershell
-   cd C:\Users\kolhe\Projects\dev-log
-   git remote add origin https://github.com/YOUR_USERNAME/dev-log.git
-   git add .
-   git commit -m "Initial dev log setup"
-   git branch -M main
-   git push -u origin main
-   ```
-
-3. Enable GitHub Actions on the repo (on by default for public repos).
-4. After the first scheduled run, you'll see a new log file each day.
-
-## Optional: add a log manually
+Or create a blank log locally:
 
 ```powershell
 .\scripts\new-log.ps1
@@ -47,4 +55,4 @@ Each file lives at `logs/YYYY-MM-DD.md` and uses this structure:
 
 ## Schedule
 
-The daily workflow runs at **6:00 AM IST** (00:30 UTC). You can change this in `.github/workflows/daily-log.yml`.
+Runs daily at **6:00 AM IST** (00:30 UTC). Edit `.github/workflows/daily-log.yml` to change the time.
